@@ -10,5 +10,15 @@ h3 {
   color: rgb rgb(221, 53, 53);
 }
 
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+h3,
+h4 {
+  font-weight: 400;
+}
+
 @import "./player";
 @import "./song";
+@import "./library";

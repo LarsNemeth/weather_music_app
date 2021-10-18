@@ -1,7 +1,8 @@
 //************************** THE PLAYER SECTION *********************** */
 
 //* Import the "useRef"
-import React, { useRef } from "react";
+// Wurd nachträglich nach App.js verschoben
+// import React, { useState } from "react";
 
 //* Import Icons from Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Components I downloaded from "https://fontawesome.com/" (This is the actual components)
@@ -9,26 +10,59 @@ import {
   faPlay,
   faAngleLeft,
   faAngleRight,
+  faPause,
 } from "@fortawesome/free-solid-svg-icons"; // This are the icons (like Play, Stop, FF, RW)
 
 //*************************** CODE START *********************/
 
-const Player = ({ currentSong }) => {
-  //! Ref (introducing the html-refernce function with useRef)
-  const audioRef = useRef(null); // The initial (starting) value is set to "null"
+const Player = ({
+  audioRef,
+  currentSong,
+  isPlaying,
+  setIsPlaying,
+  setSongInfo,
+  songInfo,
+}) => {
   //! Event Handlers (For Playing the song)
   //! We are directing to the current
   const playSongHandler = () => {
-    audioRef.current.play();
-    console.log(audioRef.current);
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(!isPlaying);
+      // console.log(audioRef.current);
+    } else {
+      audioRef.current.play();
+      setIsPlaying(!isPlaying);
+    }
   };
+
+  //! Skipping in the Song itself (mit dem Fortschritts-Balken)
+  const dragHandler = (e) => {
+    audioRef.current.currentTime = e.target.value;
+    setSongInfo({ ...songInfo, currentTime: e.target.value });
+  };
+
+  //! Function For Formating The Time
+
+  const getTime = (time) => {
+    return (
+      Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2)
+    );
+  };
+
   //? ************************* RETURN ***********************
   return (
     <div className="player">
       <div className="time-control">
-        <p>Start</p>
-        <input type="range" />
-        <p>End</p>
+        <p>{getTime(songInfo.currentTime)}</p>
+        <input
+          min={0}
+          max={songInfo.duration}
+          value={songInfo.currentTime}
+          onChange={dragHandler}
+          type="range"
+        />
+        <p>{getTime(songInfo.currentTime)}</p>
       </div>
       <div className="play-control">
         <FontAwesomeIcon className="skip-back" size="2x" icon={faAngleLeft} />
@@ -36,7 +70,11 @@ const Player = ({ currentSong }) => {
           onClick={playSongHandler}
           className="play"
           size="2x"
-          icon={faPlay}
+          icon={isPlaying ? faPause : faPlay}
+          //  icon = { if (isPlaying){
+          //    return faPause
+          //  }
+          //  else {faPlay}}
         />
         <FontAwesomeIcon
           className="skip-forward"
@@ -44,9 +82,8 @@ const Player = ({ currentSong }) => {
           icon={faAngleRight}
         />
       </div>
-      //* We are referencing to the html-link - We are parsing "useRef(null)"
-      //* from above The starting point
-      <audio ref={audioRef} src={currentSong.audio}></audio>
+      {/* We are referencing to the html-link - We are parsing "useRef(null)"
+      from above The starting point */}
     </div>
   );
 };
