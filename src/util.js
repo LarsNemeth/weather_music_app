@@ -8,7 +8,7 @@ function songs() {
       cover:
         "https://images.unsplash.com/photo-1520699697851-3dc68aa3a474?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fHJhaW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       id: uuidv4(),
-      active: false,
+      active: true,
       color: "",
       audio: "http://stream1.radiotape.fm:8000/60",
     },
@@ -18,7 +18,7 @@ function songs() {
       cover:
         "https://images.unsplash.com/photo-1527206363095-ca2f054128b0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
       id: uuidv4(),
-      active: true,
+      active: false,
       color: "",
       audio: "http://stream1.radiotape.fm:8000/109",
     },

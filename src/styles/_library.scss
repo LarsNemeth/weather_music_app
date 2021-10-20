@@ -8,6 +8,9 @@
   color: #fff;
   box-shadow: 2px 2px 50px gray;
   overflow: scroll;
+  transform: translateX(100%);
+  transition: all 0.5s ease;
+  opacity: 0;
   h2 {
     text-align: center;
   }
@@ -53,4 +56,11 @@
   background-color: rgba(235, 100, 100, 0.5);
   border-radius: 20px;
   border: transparent;
+}
+.selected {
+  background-color: rgb(3, 54, 70);
+}
+.active-library {
+  transform: translateX(0%);
+  opacity: 1;
 }
