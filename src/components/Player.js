@@ -1,6 +1,6 @@
 //************************** THE PLAYER SECTION *********************** */
 
-// Wurd nachträglich nach App.js verschoben
+// Wurde nachträglich nach App.js verschoben
 import React, { useEffect } from "react";
 
 //* Import Icons from Fontawesome
@@ -11,6 +11,9 @@ import {
   faAngleRight,
   faPause,
 } from "@fortawesome/free-solid-svg-icons"; // This are the icons (like Play, Stop, FF, RW)
+
+//* Import playAudio from util
+// import { playAudio } from "../util";
 
 //*************************** CODE START *********************/
 
@@ -25,16 +28,9 @@ const Player = ({
   setSongs,
   setCurrentSong,
 }) => {
-  //! useEffect
-
-  //? Was ist useEffect: useEffect(callback, dependencyArray) // Mit dem useEffect-Hook können wir Lebenszyklusmethoden implementieren, um die Komponente anzuweisen, nach dem Rendern einen „Effekt“ auszuführen. Die verschiedenen Arten von Effekten sind unbegrenzt, z. B. das Ändern des Hintergrundbilds oder des Dokumenttitels, das Hinzufügen von Animationen oder Musik, das Abrufen von Daten und Abonnements.
-
-  //! Wir benutzen hier den useEffect um den Titel auf active zu stellen / upzudaten, wenn wir den skip-forward oder skip-back Button benutzen
-
-  useEffect(() => {
-    // Add Active State
+  const activeLibraryHandler = (nextPrevious) => {
     const newSongs = songs.map((song) => {
-      if (song.id === currentSong.id) {
+      if (song.id === nextPrevious.id) {
         return {
           ...song,
           active: true,
@@ -47,6 +43,32 @@ const Player = ({
       }
     });
     setSongs(newSongs);
+    console.log("hello from useEffect player.js");
+  };
+
+  //! useEffect
+
+  //? Was ist useEffect: useEffect(callback, dependencyArray) // Mit dem useEffect-Hook können wir Lebenszyklusmethoden implementieren, um die Komponente anzuweisen, nach dem Rendern einen „Effekt“ auszuführen. Die verschiedenen Arten von Effekten sind unbegrenzt, z. B. das Ändern des Hintergrundbildes oder des Dokumenttitels, das Hinzufügen von Animationen oder Musik, das Abrufen von Daten und Abonnements.
+
+  //! Wir benutzen hier den useEffect um den Titel auf active zu stellen / upzudaten, wenn wir den skip-forward oder skip-back Button benutzen
+
+  useEffect(() => {
+    // Add Active State
+    // const newSongs = songs.map((song) => {
+    //   if (song.id === currentSong.id) {
+    //     return {
+    //       ...song,
+    //       active: true,
+    //     };
+    //   } else {
+    //     return {
+    //       ...song,
+    //       active: false,
+    //     };
+    //   }
+    // });
+    // setSongs(newSongs);
+    // console.log("hello from useEffect player.js");
   }, [currentSong]);
 
   //! Event Handlers (For Playing the song)
@@ -66,28 +88,6 @@ const Player = ({
   };
 
   //! Skipping in the Song itself (mit dem Fortschritts-Balken)
-  const dragHandler = (e) => {
-    audioRef.current.currentTime = e.target.value;
-    setSongInfo({ ...songInfo, currentTime: e.target.value });
-  };
-
-  //! Skip Function
-
-  const skipTrackHandler = (direction) => {
-    let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
-    if (direction === "skip-forward") {
-      setCurrentSong(songs[(currentIndex + 1) % songs.length]);
-      // console.log(`next index ${currentIndex + 1}`);
-      // console.log(`songs length ${songs.length}`);
-    }
-    if (direction === "skip-back") {
-      if ((currentIndex - 1) % songs.length === -1) {
-        setCurrentSong(songs[songs.length - 1]);
-        return;
-      }
-      setCurrentSong(songs[(currentIndex - 1) % songs.length]);
-    }
-  };
 
   //! Function For Formating The Time
 
@@ -97,19 +97,59 @@ const Player = ({
     );
   };
 
+  const dragHandler = (e) => {
+    audioRef.current.currentTime = e.target.value;
+    setSongInfo({ ...songInfo, currentTime: e.target.value });
+  };
+
+  //! Skip Function
+
+  const skipTrackHandler = async (direction) => {
+    let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
+    if (direction === "skip-forward") {
+      await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
+      activeLibraryHandler(songs[(currentIndex + 1) % songs.length]);
+    }
+    if (direction === "skip-back") {
+      if ((currentIndex - 1) % songs.length === -1) {
+        await setCurrentSong(songs[songs.length - 1]);
+        activeLibraryHandler(songs[songs.length - 1]);
+        //* wir müssen hier die playAudio-Componente einfügen, da sonst der Skip-Button ab Position 0 nicht mehr funktioniert
+        if (isPlaying) audioRef.current.play();
+        return;
+      }
+      await setCurrentSong(songs[(currentIndex - 1) % songs.length]);
+      activeLibraryHandler(songs[(currentIndex - 1) % songs.length]);
+    }
+    if (isPlaying) audioRef.current.play();
+  };
+
+  //! Add Styles (Fortschrittsbalken)
+  const trackAnimation = {
+    transform: `translateX(${songInfo.animationPercentage}%)`,
+  };
+
   //? ************************* RETURN ***********************
   return (
     <div className="player">
       <div className="time-control">
         <p>{getTime(songInfo.currentTime)}</p>
-        <input
-          min={0}
-          max={songInfo.duration || 0}
-          value={songInfo.currentTime}
-          onChange={dragHandler}
-          type="range"
-        />
-        <p>{getTime(songInfo.currentTime)}</p>
+        <div
+          style={{
+            background: `linear-gradient(to right, ${currentSong.color[0]},${currentSong.color[1]})`,
+          }}
+          className="track"
+        >
+          <input
+            min={0}
+            max={songInfo.duration || 0}
+            value={songInfo.currentTime}
+            onChange={dragHandler}
+            type="range"
+          />
+          <div style={trackAnimation} className="animate-track"></div>
+        </div>
+        <p>{songInfo.duration ? getTime(songInfo.currentTime) : "0:00"}</p>
       </div>
       <div className="play-control">
         <FontAwesomeIcon

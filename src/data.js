@@ -9,7 +9,7 @@ function songs() {
         "https://images.unsplash.com/photo-1520699697851-3dc68aa3a474?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fHJhaW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       id: uuidv4(),
       active: true,
-      color: "",
+      color: ["#205950", "#2ab3bf"],
       audio: "http://stream1.radiotape.fm:8000/60",
     },
     {

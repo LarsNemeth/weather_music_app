@@ -19,6 +19,14 @@ h4 {
   font-weight: 400;
 }
 
+.App {
+  transition: all 1.5s ease;
+}
+
+.library-active {
+  margin-right: 30%;
+}
+
 @import "./player";
 @import "./song";
 @import "./library";

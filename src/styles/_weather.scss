@@ -1,0 +1,74 @@
+// .weather {
+//     position: fixed;
+//     top: 0;
+//     right: 0;
+//     width: 20rem;
+//     height: 100%;
+//     background-color: #007989;
+//     color: #fff;
+//     box-shadow: 2px 2px 50px gray;
+//     overflow: scroll;
+//     transform: translateX(-100%);
+//     transition: all 0.5s ease;
+//     opacity: 0;
+//     h2 {
+//       text-align: center;
+//     }
+
+// //     .library-song {
+// //       display: flex;
+// //       align-items: center;
+// //       justify-content: center;
+// //       flex-direction: column;
+// //       text-align: center;
+// //       padding: 30px;
+// //       cursor: pointer;
+// //       transition: background 0.5s ease;
+
+// //       img {
+// //         padding: 10px;
+// //         width: 200px;
+// //         height: 200px;
+// //       }
+// //       &:hover {
+// //         background-color: lightblue;
+// //       }
+// //     }
+// //     .song-description {
+// //       h3 {
+// //         font-size: 1.5rem;
+// //       }
+// //       h4 {
+// //         font-size: 1rem;
+// //       }
+// //     }
+// //   }
+
+// //   * {
+// //     scrollbar-width: thin;
+// //     scrollbar-color: rgba(235, 100, 100, 0.5) transparent;
+// //   }
+// //   *::-webkit-scrollbar-track {
+// //     width: 5px;
+// //   }
+// //   *::-webkit-scrollbar-track {
+// //     background: transparent;
+// //   }
+// //   *::-webkit-scrollbar-thumb {
+// //     background-color: rgba(235, 100, 100, 0.5);
+// //     border-radius: 20px;
+// //     border: transparent;
+// //   }
+//   .selected {
+//     background-color: rgb(3, 54, 70);
+//   }
+//   .active-weather {
+//     transform: translateX(0%);
+//     opacity: 1;
+//   }
+
+//   @media screen and (max-width: 768px) {
+//     .library {
+//       width: 100%;
+//     }
+//   }

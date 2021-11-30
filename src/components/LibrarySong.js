@@ -1,4 +1,6 @@
 import React from "react";
+// Delete the util
+// import { playAudio } from "../util";
 
 const LibrarySong = ({
   song,
@@ -9,9 +11,9 @@ const LibrarySong = ({
   isPlaying,
   setSongs,
 }) => {
-  const songSelectHandler = () => {
-    setCurrentSong(song);
-    // Add Active State
+  const songSelectHandler = async () => {
+    await setCurrentSong(song);
+    // // Add Active State
     const newSongs = songs.map((song) => {
       if (song.id === id) {
         return {
@@ -25,17 +27,24 @@ const LibrarySong = ({
         };
       }
     });
+
+    console.log("select song");
+
     setSongs(newSongs);
-    // audioRef.current.play();
     // check if the song is playing
-    if (isPlaying) {
-      const playPromise = audioRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.then((audio) => {
-          audioRef.current.play();
-        });
-      }
-    }
+    if (isPlaying) audioRef.current.play();
+
+    // audioRef.current.play();
+
+    //! This Code we are copying to the util-file
+    // if (isPlaying) {
+    //   const playPromise = audioRef.current.play();
+    //   if (playPromise !== undefined) {
+    //     playPromise.then((audio) => {
+    //       audioRef.current.play();
+    //     });
+    //   }
+    // }
   };
 
   return (
