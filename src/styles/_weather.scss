@@ -56,7 +56,7 @@
   padding: 0;
 }
 
-.weather-app {
+#weather-app {
   padding: 30px;
   box-sizing: border-box;
   font-family: "montserrat", sans-serif;
@@ -72,7 +72,7 @@
   transition: 0.4s ease-out;
 }
 
-.weather-app.warm {
+#weather-app.warm {
   background-image: url("../assets/warm-bg.jpg");
   background-size: cover;
   background-position: bottom;
