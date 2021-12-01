@@ -27,7 +27,12 @@ h4 {
   margin-right: 30%;
 }
 
+.weather-active {
+  margin-left: 30%;
+}
+
 @import "./player";
 @import "./song";
 @import "./library";
 @import "./nav";
+@import "./weather";

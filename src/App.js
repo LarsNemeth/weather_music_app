@@ -8,7 +8,7 @@ import Player from "./components/Player";
 import Song from "./components/Song";
 import Library from "./components/Library";
 import Nav from "./components/Nav";
-import Weather from "./components/Weather";
+import Weather from "./components/weatherComponents/Weather";
 
 //Import Util
 import data from "./data";
@@ -32,7 +32,7 @@ function App() {
   const [libraryStatus, setLibraryStatus] = useState(false);
 
   //! Weather State
-  // const [weatherStatus, setWeatherStatus] = useState(false);
+  const [weatherStatus, setWeatherStatus] = useState(false);
 
   //! Time Update
   const timeUpdateHandler = (e) => {
@@ -64,36 +64,43 @@ function App() {
   //* return ************
   return (
     <div className={`App ${libraryStatus ? "library-active" : ""}`}>
-      <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus} />
-      <Song currentSong={currentSong} />
-      <Player
-        audioRef={audioRef}
-        setIsPlaying={setIsPlaying}
-        isPlaying={isPlaying}
-        currentSong={currentSong}
-        setSongInfo={setSongInfo}
-        songInfo={songInfo}
-        songs={songs}
-        setSongs={setSongs}
-        setCurrentSong={setCurrentSong}
-      />
-      <Library
-        audioRef={audioRef}
-        songs={songs}
-        setCurrentSong={setCurrentSong}
-        isPlaying={isPlaying}
-        setSongs={setSongs}
-        libraryStatus={libraryStatus}
-      />
-      <audio
-        onTimeUpdate={timeUpdateHandler}
-        onLoadedMetadata={timeUpdateHandler}
-        ref={audioRef}
-        src={currentSong.audio}
-        //! Skip to the next song if ended // Brauchen wir (noch nicht)
-        // onEnded={songEndHandler}
-      ></audio>
-      {/* <Weather weatherStatus={weatherStatus} /> */}
+      <div className={`App ${weatherStatus ? "weather-active" : ""}`}>
+        <Nav
+          libraryStatus={libraryStatus}
+          setLibraryStatus={setLibraryStatus}
+          weatherStatus={weatherStatus}
+          setWeatherStatus={setWeatherStatus}
+        />
+        <Song currentSong={currentSong} />
+        <Player
+          audioRef={audioRef}
+          setIsPlaying={setIsPlaying}
+          isPlaying={isPlaying}
+          currentSong={currentSong}
+          setSongInfo={setSongInfo}
+          songInfo={songInfo}
+          songs={songs}
+          setSongs={setSongs}
+          setCurrentSong={setCurrentSong}
+        />
+        <Weather weatherStatus={weatherStatus} />
+        <Library
+          audioRef={audioRef}
+          songs={songs}
+          setCurrentSong={setCurrentSong}
+          isPlaying={isPlaying}
+          setSongs={setSongs}
+          libraryStatus={libraryStatus}
+        />
+        <audio
+          onTimeUpdate={timeUpdateHandler}
+          onLoadedMetadata={timeUpdateHandler}
+          ref={audioRef}
+          src={currentSong.audio}
+          //! Skip to the next song if ended // Brauchen wir (noch nicht)
+          // onEnded={songEndHandler}
+        ></audio>
+      </div>
     </div>
   );
 }

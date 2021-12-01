@@ -3,10 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMusic } from "@fortawesome/free-solid-svg-icons";
 import { WiDaySnowThunderstorm } from "weather-icons-react";
 
-function Nav({ setLibraryStatus, libraryStatus }) {
+function Nav({
+  setLibraryStatus,
+  libraryStatus,
+  weatherStatus,
+  setWeatherStatus,
+}) {
   return (
     <nav>
-      <button onClick={() => setLibraryStatus(!libraryStatus)}>
+      <button onClick={() => setWeatherStatus(!weatherStatus)}>
         Wetter
         <WiDaySnowThunderstorm
           icon={WiDaySnowThunderstorm}
