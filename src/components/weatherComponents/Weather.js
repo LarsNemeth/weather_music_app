@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { getWeatherData } from "../../services/apiKeys";
+import React, { useState, useEffect } from 'react';
+import { getWeatherData } from '../../services/apiKeys';
 
 const Weather = ({ weatherStatus }) => {
   const [weatherdata, setWeatherData] = useState(null);
-  const [city, setCity] = useState("Berlin");
+  const [city, setCity] = useState('Berlin');
   const [loading, setLoading] = useState(false);
 
   const getData = async () => {
@@ -19,12 +19,12 @@ const Weather = ({ weatherStatus }) => {
   //   setCity(e.target.value);
   // };
 
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
-    <div className={`weather ${weatherStatus ? "active-weather" : ""}`}>
+    <div className={`weather ${weatherStatus ? 'active-weather' : ''}`}>
       <div className="weather-main">
         <div className="weather-app">
           <div className="search-box">
