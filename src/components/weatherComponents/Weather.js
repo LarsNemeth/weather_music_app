@@ -68,16 +68,21 @@ const Weather = ({ weatherStatus }) => {
   };
 
   //* Change Background-Image
+  //* id="app" :class="typeof weather.main != "undefined" && weather.main.temp > 16  ? "weather-app-warm" : """
 
-  const bgChange = () => {
-    if ("weather-app" && "typeof weather.main.temp > 16") {
-      return "weather-app-warm";
-    }
-  };
+  //   function changeImage() {
+  //     var image = document.getElementById("weather-app");
+  //     if (image.src.match("colorbottel")) {
+  //         image.src = "waterbottel.gif";
+  //     }
+  //     else {
+  //         image.src = "colorbottel.gif";
+  //     }
+  // }
 
   return (
     <div className={`weather ${weatherStatus ? "active-weather" : ""}`}>
-      <div className={bgChange()}>
+      <div className="weather-main">
         <div id="weather-app">
           <div className="search-box">
             <input
