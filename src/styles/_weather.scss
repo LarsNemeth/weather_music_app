@@ -57,7 +57,6 @@
 }
 
 .weather-app {
-  padding: 30px;
   box-sizing: border-box;
   font-family: 'montserrat', sans-serif;
   min-height: 100vh;
@@ -73,6 +72,8 @@
 }
 
 .weather-app-warm {
+  padding: 30px;
+  box-sizing: border-box;
   min-height: 100vh;
   background-image: url('../assets/warm-bg.jpg');
   background-size: cover;

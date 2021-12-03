@@ -64,6 +64,25 @@ function App() {
     } else {
       setCurrentSong(songs[1]);
     }
+    const newSongs = songs.map((song) => {
+      if (song.id === currentSong.id) {
+        return {
+          ...song,
+          active: true,
+        };
+      } else {
+        return {
+          ...song,
+          active: false,
+        };
+      }
+    });
+
+    console.log('select song');
+
+    setSongs(newSongs);
+    // check if the song is playing
+    if (isPlaying) audioRef.current.play();
   };
 
   //! Wenn der Song endet spiele den nächsten // Brauchen wir nicht beim Streamen ggf. bei Wetterwechsel

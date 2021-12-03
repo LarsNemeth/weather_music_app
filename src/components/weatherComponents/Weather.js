@@ -29,10 +29,10 @@ const Weather = ({ weatherStatus }) => {
     getData();
   };
 
-  //* UseEffect / getData running *********
-  useEffect(() => {
-    getData();
-  }, []);
+  // //* UseEffect / getData running *********
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   //* Date Operator ******
 
