@@ -30,7 +30,7 @@ function songs() {
       id: uuidv4(),
       active: false,
       color: "",
-      audio: "http://stream1.radiotape.fm:8000/109",
+      audio: "http://stream1.radiotape.fm:8000/108",
     },
     {
       name: "Clowds",
@@ -40,7 +40,7 @@ function songs() {
       id: uuidv4(),
       active: false,
       color: "",
-      audio: "http://stream1.radiotape.fm:8000/109",
+      audio: "http://stream1.radiotape.fm:8000/85",
     },
   ];
 }

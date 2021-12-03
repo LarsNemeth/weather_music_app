@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { getWeatherData } from "../../services/apiKeys";
+import React, { useState, useEffect, useContext } from 'react';
+import { getWeatherData } from '../../services/apiKeys';
+
+import { weatherMusicContext } from '../../App';
 
 const Weather = ({ weatherStatus }) => {
   const [weatherdata, setWeatherData] = useState(null);
-  const [city, setCity] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [city, setCity] = useState('');
+  const { changeMood } = useContext(weatherMusicContext);
 
   const getData = async () => {
     try {
       const data = await getWeatherData(city);
       setWeatherData(data);
       console.log(data);
+      changeMood(data);
     } catch (error) {
       console.log("Can't get no Data from API", error.message);
     }
@@ -36,27 +39,27 @@ const Weather = ({ weatherStatus }) => {
   const dateBuilder = () => {
     let d = new Date();
     let months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
     let days = [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday',
     ];
 
     let day = days[d.getDay()];
@@ -70,15 +73,24 @@ const Weather = ({ weatherStatus }) => {
   //* Change Background-Image
 
   const bgChange = () => {
-    if ("weather-app" && "typeof weather.main.temp > 16") {
-      return "weather-app-warm";
+    if (weatherdata === null) {
+      return;
+    }
+
+    const celcius = parseFloat(weatherdata.main.temp - 273.15).toFixed(0);
+    if (celcius < 16) {
+      return 'weather-app';
+    } else {
+      return 'weather-app-warm';
     }
   };
 
+  console.log('Hello from me', weatherdata);
+
   return (
-    <div className={`weather ${weatherStatus ? "active-weather" : ""}`}>
-      <div className={bgChange()}>
-        <div id="weather-app">
+    <div className={`weather ${weatherStatus ? 'active-weather' : ''}`}>
+      <div className="weather-app">
+        <div className={bgChange()}>
           <div className="search-box">
             <input
               type="text"

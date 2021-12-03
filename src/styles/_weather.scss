@@ -56,24 +56,25 @@
   padding: 0;
 }
 
-#weather-app {
+.weather-app {
   padding: 30px;
   box-sizing: border-box;
-  font-family: "montserrat", sans-serif;
+  font-family: 'montserrat', sans-serif;
   min-height: 100vh;
   background-image: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.22),
       rgba(0, 0, 0, 0.73)
     ),
-    url("../assets/cold-bg.jpg");
+    url('../assets/cold-bg.jpg');
   background-size: cover;
   background-position: bottom;
   transition: 0.4s ease-out;
 }
 
-#weather-app.warm {
-  background-image: url("../assets/warm-bg.jpg");
+.weather-app-warm {
+  min-height: 100vh;
+  background-image: url('../assets/warm-bg.jpg');
   background-size: cover;
   background-position: bottom;
   transition: 0.4s ease-out;
