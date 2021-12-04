@@ -11,7 +11,7 @@ h3 {
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 h3,
@@ -28,11 +28,11 @@ h4 {
 }
 
 .weather-active {
-  margin-left: 30%;
+  margin-left: 40%;
 }
 
-@import "./player";
-@import "./song";
-@import "./library";
-@import "./nav";
-@import "./weather";
+@import './player';
+@import './song';
+@import './library';
+@import './nav';
+@import './weather';
