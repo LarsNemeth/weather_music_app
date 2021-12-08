@@ -10,7 +10,7 @@ export const getWeatherData = async (cityname) => {
     );
     const response = await axios.get(baseUrl + `q=${cityname}&appid=${apiKey}`);
 
-    console.log('data', response.data);
+    // console.log('This is my openweather API from apiKeys', response.data);
     return response.data;
   } catch (error) {
     throw error;

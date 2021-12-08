@@ -2,44 +2,50 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 20rem;
+  width: 18rem;
   height: 100%;
-  background-color: #007989;
   color: #fff;
-  box-shadow: 2px 2px 50px gray;
+
   overflow: scroll;
   transform: translateX(100%);
   transition: all 0.5s ease;
   opacity: 0;
+  border-radius: 10%;
   h2 {
     text-align: center;
+    color: #fff;
   }
 
   .library-song {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 30px;
-    cursor: pointer;
-    transition: background 0.5s ease;
+    border-radius: 10%;
+    .img-container {
+      position: relative;
+      text-align: center;
+      color: white;
 
-    img {
-      padding: 10px;
-      width: 200px;
-      height: 200px;
-    }
-    &:hover {
-      background-color: lightblue;
-    }
-  }
-  .song-description {
-    h3 {
-      font-size: 1.5rem;
-    }
-    h4 {
-      font-size: 1rem;
+      img {
+        padding: 10px;
+        margin: 10px;
+        width: 15rem;
+        height: 15rem;
+        border-radius: 10%;
+      }
+      &:hover {
+        background-color: rgb(236, 232, 230);
+      }
+
+      .song-description {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      h2 {
+        font-size: 2.5rem;
+        color: #fff;
+        text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
+          0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1);
+      }
     }
   }
 }
@@ -69,6 +75,10 @@
 
 @media screen and (max-width: 768px) {
   .library {
-    width: 100%;
+    margin-top: 168px;
+
+    .library-song {
+      margin: 100px;
+    }
   }
 }
