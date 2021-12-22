@@ -1,16 +1,16 @@
 //************************** THE PLAYER SECTION *********************** */
 
 // Wurde nachträglich nach App.js verschoben
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 //* Import Icons from Fontawesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Components I downloaded from "https://fontawesome.com/" (This is the actual components)
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Components I downloaded from "https://fontawesome.com/" (This is the actual components)
 import {
   faPlay,
   faAngleLeft,
   faAngleRight,
   faPause,
-} from "@fortawesome/free-solid-svg-icons"; // This are the icons (like Play, Stop, FF, RW)
+} from '@fortawesome/free-solid-svg-icons'; // This are the icons (like Play, Stop, FF, RW)
 
 //* Import playAudio from util
 // import { playAudio } from "../util";
@@ -43,7 +43,7 @@ const Player = ({
       }
     });
     setSongs(newSongs);
-    console.log("hello from useEffect player.js");
+    console.log('hello from useEffect player.js');
   };
 
   //! useEffect
@@ -93,7 +93,7 @@ const Player = ({
 
   const getTime = (time) => {
     return (
-      Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2)
+      Math.floor(time / 60) + ':' + ('0' + Math.floor(time % 60)).slice(-2)
     );
   };
 
@@ -106,11 +106,11 @@ const Player = ({
 
   const skipTrackHandler = async (direction) => {
     let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
-    if (direction === "skip-forward") {
+    if (direction === 'skip-forward') {
       await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
       activeLibraryHandler(songs[(currentIndex + 1) % songs.length]);
     }
-    if (direction === "skip-back") {
+    if (direction === 'skip-back') {
       if ((currentIndex - 1) % songs.length === -1) {
         await setCurrentSong(songs[songs.length - 1]);
         activeLibraryHandler(songs[songs.length - 1]);
@@ -134,12 +134,7 @@ const Player = ({
     <div className="player">
       <div className="time-control">
         <p>{getTime(songInfo.currentTime)}</p>
-        <div
-          style={{
-            background: `linear-gradient(to right, ${currentSong.color[0]},${currentSong.color[1]})`,
-          }}
-          className="track"
-        >
+        <div className="track">
           <input
             min={0}
             max={songInfo.duration || 0}
@@ -149,11 +144,11 @@ const Player = ({
           />
           <div style={trackAnimation} className="animate-track"></div>
         </div>
-        <p>{songInfo.duration ? getTime(songInfo.currentTime) : "0:00"}</p>
+        <p>{songInfo.duration ? getTime(songInfo.currentTime) : '0:00'}</p>
       </div>
       <div className="play-control">
         <FontAwesomeIcon
-          onClick={() => skipTrackHandler("skip-back")}
+          onClick={() => skipTrackHandler('skip-back')}
           className="skip-back"
           size="2x"
           icon={faAngleLeft}
@@ -169,7 +164,7 @@ const Player = ({
           //  else {faPlay}}
         />
         <FontAwesomeIcon
-          onClick={() => skipTrackHandler("skip-forward")}
+          onClick={() => skipTrackHandler('skip-forward')}
           className="skip-forward"
           size="2x"
           icon={faAngleRight}

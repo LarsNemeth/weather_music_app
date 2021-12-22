@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { getWeatherData } from '../../services/apiKeys';
 import { getCityImage } from '../../services/getCityImage';
 
@@ -12,13 +12,14 @@ const Weather = ({
   setWeatherData,
 }) => {
   const { changeMood } = useContext(weatherMusicContext);
+  const [_city, _setCity] = useState(city);
 
   //! Get the Weatherdata from openweather
-  const getData = async () => {
+  const getData = async (city) => {
     try {
       const data = await getWeatherData(city);
       setWeatherData(data);
-      console.log('Data from my getDate-Funcion', data);
+      // console.log('Data from my getDate-Funcion', data);
       changeMood(data);
     } catch (error) {
       console.log("Can't get no Data from openweather_API", error.message);
@@ -26,25 +27,27 @@ const Weather = ({
   };
 
   // //! Get the ImageData from unsplash
-  const getIamgeData = async () => {
+  const getImageData = async (city) => {
     try {
       const data = await getCityImage(city);
 
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.log("Can't get no Data from unsplash_API", error.message);
     }
   };
 
+  //***************************************************************** */
   //* Change City Name *********
   const onChangeCity = (e) => {
-    setCity(e.target.value);
+    _setCity(e.target.value);
   };
 
   //* Button Function *********
   const onClickButton = () => {
-    getData();
-    getIamgeData();
+    setCity(_city);
+    getData(_city);
+    getImageData(_city);
   };
 
   // //* UseEffect / getData running *********
@@ -88,41 +91,9 @@ const Weather = ({
     return `${day} ${date} ${month} ${year}`;
   };
 
-  //* Change Background-Image due to the weather condition
-
-  // const bgChange = () => {
-  //   if (weatherdata === null) {
-  //     return;
-  //   }
-
-  //   const celcius = parseFloat(weatherdata.main.temp - 273.15).toFixed(0);
-  //   const weatherCondition = weatherdata.weather[0].main;
-
-  //   //! Snow
-  //   if (celcius <= 1) {
-  //     return 'weather-app-snow';
-  //   }
-  //   //! Clowds
-  //   if (celcius <= 5 && weatherCondition === 'Rain') {
-  //     return 'weather-app-clowds';
-  //     //! Sun
-  //   }
-  //   //! Rain
-  //   if (celcius >= 6 && celcius <= 16) {
-  //     return 'weather-app-rain';
-  //     //! Sun
-  //   }
-  //   if (celcius >= 17 && weatherCondition === 'Clear') {
-  //     return 'weather-app-sun';
-  //   }
-
-  //   // else {
-  //   //   return 'weather-app-warm';
-  //   // }
-  // };
-
   // console.log('Clowdy, rainy or sunny', weatherdata.weather[0].main);
-  console.log('This is my weatherdata from Weather.js:', weatherdata);
+  // console.log('This is my weatherdata from Weather.js:', weatherdata);
+  // console.log('This is my cityData:', city);
 
   return (
     <div className={`weather ${weatherStatus ? 'active-weather' : ''}`}>

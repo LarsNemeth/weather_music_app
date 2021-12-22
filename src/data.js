@@ -42,6 +42,16 @@ function songs() {
       color: '',
       audio: 'http://stream1.radiotape.fm:8000/85',
     },
+    {
+      name: 'Mist',
+      artist: 'Clowdy Days Playlist',
+      cover:
+        'https://images.unsplash.com/photo-1542302558-34ccde9f2a43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
+      id: uuidv4(),
+      active: false,
+      color: '',
+      audio: 'http://stream1.radiotape.fm:8000/99',
+    },
   ];
 }
 
