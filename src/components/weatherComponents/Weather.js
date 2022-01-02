@@ -1,32 +1,53 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { getWeatherData } from '../../services/apiKeys';
+import { getCityImage } from '../../services/getCityImage';
 
 import { weatherMusicContext } from '../../App';
 
-const Weather = ({ weatherStatus }) => {
-  const [weatherdata, setWeatherData] = useState(null);
-  const [city, setCity] = useState('');
+const Weather = ({
+  weatherStatus,
+  city,
+  setCity,
+  weatherdata,
+  setWeatherData,
+}) => {
   const { changeMood } = useContext(weatherMusicContext);
+  const [_city, _setCity] = useState(city);
 
-  const getData = async () => {
+  //! Get the Weatherdata from openweather
+  const getData = async (city) => {
     try {
       const data = await getWeatherData(city);
       setWeatherData(data);
-      console.log(data);
+      // console.log('Data from my getDate-Funcion', data);
       changeMood(data);
     } catch (error) {
-      console.log("Can't get no Data from API", error.message);
+      console.log("Can't get no Data from openweather_API", error.message);
     }
   };
 
+  // //! Get the ImageData from unsplash
+  const getImageData = async (city) => {
+    try {
+      const data = await getCityImage(city);
+
+      // console.log(data);
+    } catch (error) {
+      console.log("Can't get no Data from unsplash_API", error.message);
+    }
+  };
+
+  //***************************************************************** */
   //* Change City Name *********
   const onChangeCity = (e) => {
-    setCity(e.target.value);
+    _setCity(e.target.value);
   };
 
   //* Button Function *********
   const onClickButton = () => {
-    getData();
+    setCity(_city);
+    getData(_city);
+    getImageData(_city);
   };
 
   // //* UseEffect / getData running *********
@@ -70,27 +91,20 @@ const Weather = ({ weatherStatus }) => {
     return `${day} ${date} ${month} ${year}`;
   };
 
-  //* Change Background-Image
-
-  const bgChange = () => {
-    if (weatherdata === null) {
-      return;
-    }
-
-    const celcius = parseFloat(weatherdata.main.temp - 273.15).toFixed(0);
-    if (celcius < 16) {
-      return 'weather-app';
-    } else {
-      return 'weather-app-warm';
-    }
-  };
-
-  console.log('Hello from me', weatherdata);
+  // console.log('Clowdy, rainy or sunny', weatherdata.weather[0].main);
+  // console.log('This is my weatherdata from Weather.js:', weatherdata);
+  // console.log('This is my cityData:', city);
 
   return (
     <div className={`weather ${weatherStatus ? 'active-weather' : ''}`}>
-      <div className="weather-app">
-        <div className={bgChange()}>
+      <div
+        className="weather-app"
+        style={{
+          backgroundImage:
+            'url(' + `https://source.unsplash.com/500x800/?${city}` + ')',
+        }}
+      >
+        <div className="move-for-mobile">
           <div className="search-box">
             <input
               type="text"

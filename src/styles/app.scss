@@ -24,11 +24,21 @@ h4 {
 }
 
 .library-active {
-  margin-right: 30%;
+  margin-right: 0%;
 }
 
 .weather-active {
-  margin-left: 40%;
+  margin-left: 10%;
+}
+
+.bg-starter-img {
+  box-sizing: border-box;
+
+  background-image: url('../assets/hamurg_sky_polizei.jpeg');
+
+  background-size: cover;
+  background-position: bottom;
+  transition: 0.4s ease-out;
 }
 
 @import './player';
@@ -36,3 +46,5 @@ h4 {
 @import './library';
 @import './nav';
 @import './weather';
+@import './intro';
+@import './mobile-styling';

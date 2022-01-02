@@ -1,0 +1,37 @@
+@media screen and (max-width: 768px) {
+  .weather {
+    width: 100%;
+  }
+  .library {
+    width: 100%;
+  }
+
+  .library-song {
+    margin: 70px;
+  }
+
+  .song-container img {
+    width: 300px;
+    height: 300px;
+  }
+
+  .move-for-mobile {
+    padding-top: 130px;
+  }
+
+  .active-weather {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+
+  .active-library {
+    h2 {
+      display: none;
+    }
+  }
+
+  .weather-active {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}

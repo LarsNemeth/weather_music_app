@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 // Delete the util
 // import { playAudio } from "../util";
 
@@ -28,7 +28,7 @@ const LibrarySong = ({
       }
     });
 
-    console.log("select song");
+    console.log('select song');
 
     setSongs(newSongs);
     // check if the song is playing
@@ -51,12 +51,13 @@ const LibrarySong = ({
     // wenn der song active ist nimm die Klasse "selected", andernfalls nehme die leeren Anführungszeichen
     <div
       onClick={songSelectHandler}
-      className={`library-song ${song.active ? "selected" : ""}`}
+      className={`library-song ${song.active ? 'selected' : ''}`}
     >
-      <img lat={song.name} src={song.cover} alt="moodMusic"></img>
-      <div className="song-description">
-        <h3>{song.name}</h3>
-        <h4>{song.artist}</h4>
+      <div className="img-container">
+        <img lat={song.name} src={song.cover} alt="moodMusic"></img>
+        <div className="song-description">
+          <h2>{song.name}</h2>
+        </div>
       </div>
     </div>
   );
