@@ -107,7 +107,7 @@ function App() {
     if (isPlaying) audioRef.current.play();
   };
 
-  //! Change Music Weater Mood Context-API
+  //! Change Music Weather Mood Context-API
 
   const bgimgChange = () => {
     // console.log(weatherdata);

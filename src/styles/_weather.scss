@@ -40,42 +40,38 @@
   opacity: 1;
 }
 
-@media screen and (max-width: 768px) {
-  .weather {
-    width: 100%;
-  }
-  .library {
-    width: 100%;
-  }
-  .song-container img {
-    width: 300px;
-    height: 300px;
-  }
+// @media screen and (max-width: 768px) {
+//   .weather {
+//     width: 100%;
+//   }
+//   .library {
+//     width: 100%;
 
-  .library-song {
-    margin: 50px;
-  }
+//   }
+// .song-container img {
+//   display: none;
+// }
 
-  .move-for-mobile {
-    padding-top: 130px;
-  }
+//   .move-for-mobile {
+//     padding-top: 130px;
+//   }
 
-  .active-weather {
-    transform: translateX(0%);
-    opacity: 1;
-  }
+//   .active-weather {
+//     transform: translateX(0%);
+//     opacity: 1;
+//   }
 
-  .active-library {
-    h2 {
-      display: none;
-    }
-  }
+//   .active-library {
+//     h2 {
+//       display: none;
+//     }
+//   }
 
-  .weather-active {
-    margin-left: 10%;
-    margin-right: 10%;
-  }
-}
+//   .weather-active {
+//     margin-left: 10%;
+//     margin-right: 10%;
+//   }
+// }
 
 .weather-main {
   background-image: linear-gradient(
